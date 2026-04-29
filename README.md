@@ -10,7 +10,7 @@ This project builds a **content-based movie recommender system** using cosine si
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+   git clone https://github.com/vigneshgit2005/AI-Based-Movie-Recommendation-System.git
    
 ---
 
