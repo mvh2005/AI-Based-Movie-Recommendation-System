@@ -3,6 +3,15 @@
 
 This project builds a **content-based movie recommender system** using cosine similarity on user ratings data. It suggests movies similar to a given movie based on what other users have rated similarly.
 
+
+---
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+   
 ---
 
 ## 📁 Dataset Information
@@ -69,14 +78,6 @@ Enter a movie title: Babe (1995)
     Empire Strikes Back, The (1980) — Similarity Score: 0.56
 
     
----
-
-## 📈 Visualizations
-
-- **Bar Chart**: Top 5 movie recommendations for a selected movie
-- **Heatmap**: Cosine similarity among the top 10 most-rated movies
-
----
 
 ## 📦 Future Improvements
 
