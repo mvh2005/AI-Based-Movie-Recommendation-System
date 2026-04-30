@@ -1,96 +1,111 @@
-# 🎬 AI-Based-Movie-Recommendation-System
+# 🎬 Movie Recommendation System (TMDB)
 
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-orange)](https://scikit-learn.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-red)](https://pandas.pydata.org/)
 
-This project builds a **content-based movie recommender system** using cosine similarity on user ratings data. It suggests movies similar to a given movie based on what other users have rated similarly.
-
-
----
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/vigneshgit2005/AI-Based-Movie-Recommendation-System.git
-   
----
-
-## 📁 Dataset Information
-
-The project uses the following CSV files:
-
-1. **Dataset.csv**  
-   Contains user ratings:
-   - `user_id`: ID of the user
-   - `item_id`: ID of the movie
-   - `rating`: Rating given by the user
-
-2. **Movie_Id_Titles.csv**  
-   Contains movie titles:
-   - `item_id`: Movie ID
-   - `title`: Movie name
+An end-to-end AI-powered recommendation engine utilizing the **TMDB dataset (1M+ movies)**. This project implements a hybrid approach combining statistical weighting with Natural Language Processing (NLP) to provide high-quality movie suggestions.
 
 ---
 
-## 📊 Features
+## 🚀 Project Overview
+The system addresses the "cold start" and "popularity bias" problems by offering three distinct ways to discover content:
 
-- Creates a **User-Movie rating matrix**
-- Uses **cosine similarity** to find similar movies
-- Provides **top 5 recommended movies** for a given input
-- **Visualizes**:
-  - Bar chart of recommended movies
-  - Heatmap of similarity among top 10 rated movies
-- Interactive function to input any movie and get recommendations
+1. **Content-Based Filtering**: Finds movies similar in theme and description using NLP.  
+2. **Weighted Rating System**: A statistical model that balances average rating with vote count.  
+3. **Interactive Discovery**: Dynamic dashboards for real-time genre and metadata exploration.  
 
 ---
 
-## 🛠️ How to Run
+## 🛠️ Technical Architecture
 
-### 📌 Requirements:
-- Python 3.x
-- pandas, matplotlib, seaborn, scikit-learn
+### 1. Data Engineering & Processing
+To handle the scale of 1,000,000+ records, the pipeline includes:
 
-### 🚀 Steps:
-1. Clone or download this repository
-2. Place `Dataset.csv` and `Movie_Id_Titles.csv` in the same directory
-3. Open and run `Movie_Recommendation_Project.ipynb` in **Jupyter Notebook**
+- **Robust Ingestion**: Parsing large CSVs with `latin1` encoding and error-handling for inconsistent line breaks.  
+- **Metadata Soup**: A unified feature vector created by merging `genres`, `keywords`, and `overviews` to capture the "DNA" of a movie.  
 
 ---
 
-## 🧠 Example Output
+### 2. The Recommendation Engines
 
-**Input:**
-
-Enter a movie title: Babe (1995)
-
-
-**Output:**
-
-🎬 Top 5 movies similar to 'Babe (1995)':
-
-    Back to the Future (1985) — Similarity Score: 0.59
-
-    Raiders of the Lost Ark (1981) — Similarity Score: 0.57
-
-    E.T. the Extra-Terrestrial (1982) — Similarity Score: 0.57
-
-    Princess Bride, The (1987) — Similarity Score: 0.56
-
-    Empire Strikes Back, The (1980) — Similarity Score: 0.56
-
-    
-
-## 📦 Future Improvements
-
-- Add a **Streamlit web app** for live interaction
-- Include **user-based recommendations**
-- Integrate with a movie poster API for enhanced UI
+#### **A. Content-Based Filtering**
+We utilize **TF-IDF (Term Frequency-Inverse Document Frequency)** to vectorize movie descriptions and calculate **Cosine Similarity** between them.
 
 ---
 
-## 🤝 Credits
+#### **B. IMDb Weighted Rating**
 
-Built with ❤️ using Python, pandas, scikit-learn, and seaborn.
+To prevent movies with a single 10/10 rating from topping the charts, we implement the IMDb formula:
+
+```
+
+W = (v / (v + m) * R) + (m / (v + m) * C)
+
+````
+
+| Variable | Description |
+|----------|-------------|
+| **v** | Number of votes for the movie |
+| **m** | Minimum votes required to be listed (90th percentile) |
+| **R** | Average rating of the movie |
+| **C** | Mean vote across the dataset |
 
 ---
 
+## 📊 Key Features & Visualizations
 
+- **Interactive Dashboards**: Built with `ipywidgets`, enabling real-time recommendations without coding.  
+- **Genre Analytics**: Market share visualization using **Treemaps** (highlighting dominant genres like Drama and Documentary).  
+- **Metadata Explorer**: Insights into financial performance (Budget vs Revenue) and production trends.  
+
+---
+
+## 📦 Tech Stack
+
+- **Language**: Python  
+- **ML/NLP**: `scikit-learn` (TF-IDF, Cosine Similarity)  
+- **Data Analysis**: `pandas`, `numpy`  
+- **Visualization**: `matplotlib`, `seaborn`, `squarify`  
+- **UI/UX**: `ipywidgets`  
+
+---
+
+## ⚙️ Installation & Usage
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/movie-recommender.git
+cd movie-recommender
+````
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the Notebook
+
+Open `movie_recommender.ipynb` in Jupyter Notebook or VS Code and run all cells to launch the interactive system.
+
+---
+
+## 📈 Future Roadmap
+
+* [ ] Integrate live TMDB API for real-time updates
+* [ ] Implement Collaborative Filtering using SVD
+* [ ] Deploy as a web app using Streamlit
+
+---
+
+## 👤 Author
+
+**Vignesh M**
+
+## 🎥 Dataset
+
+TMDB 5000 / 1M Movie Dataset
+
+```
+```
