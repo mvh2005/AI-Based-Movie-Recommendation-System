@@ -122,8 +122,8 @@ As the Avengers and their allies have continued to protect the world from threat
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/movie-recommender.git
-cd movie-recommender
+https://github.com/vigneshgit2005/AI-Based-Movie-Recommendation-System.git
+cd Movie_Recommendation.ipynd
 ````
 
 ### 2. Install Dependencies
@@ -134,7 +134,7 @@ pip install -r requirements.txt
 
 ### 3. Run the Notebook
 
-Open `movie_recommender.ipynb` in Jupyter Notebook or VS Code and run all cells to launch the interactive system.
+Open `Movie_Recommendation.ipynd` in Jupyter Notebook or VS Code and run all cells to launch the interactive system.
 
 ---
 
