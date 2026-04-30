@@ -56,34 +56,47 @@ W = (v / (v + m) * R) + (m / (v + m) * C)
 
 ## Genres in the Dataset 
 
-![Movie Output](images/Generetypes.png)
+![Movie Output](images/Genere_types.png)
+
+## 🎬 Search by Movie Name
+
+![Movie Output](images/Movie_Search.png)
 
 ## 🎬 Search by Genre (Output)
 
-```bash
-Enter genre: Action
+![Movie Output](images/Genre_Search.png)
 
-Results:
-1. Mad Max: Fury Road
-2. John Wick
-3. The Dark Knight
-```
-## 🎬 Search by Movie Name
+``` If the user wishes to view a film from the provided list, they may copy and paste the title into the field below to access the full movie information. ```
 
-| Movie Name        | Genre  | Rating |
-|------------------|--------|--------|
-| Inception        | Sci-Fi | 8.8    |
-| Interstellar     | Sci-Fi | 8.6    |
-| The Dark Knight  | Action | 9.0    |
+## 🎬 Output Screen:
 
----
-## 🎬 Output Screenshots
+🎥 Movie Metadata Explorer
+Movie Name: Avengers: Infinity War  
 
-### Search by Genre
-![Genre Output](images/genre_output.png)
+============================================================  
 
-### Search by Movie Name
-![Movie Search Output](images/movie_output.png)
+🎬 MOVIE DETAILS: AVENGERS: INFINITY WAR  
+ 
+===========================================================
+
+Tagline:        An entire universe. Once and for all.  
+Genres:         Adventure, Action, Science Fiction  
+Release Date:   2018-04-25  
+Runtime:        149 mins  
+Rating:         8.255 (27713 votes)  
+Weighted Scr:   8.25  
+Budget:         $300,000,000  
+Revenue:        $2,052,415,039  
+Status:         Released  
+
+OVERVIEW:  
+As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.  
+
+==============================================================================
+
+
+
+
 
 ---
 
