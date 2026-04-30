@@ -54,6 +54,10 @@ W = (v / (v + m) * R) + (m / (v + m) * C)
 
 ---
 
+## Genres in the Dataset 
+
+![Movie Output](images/Generetypes.png)
+
 ## 🎬 Search by Genre (Output)
 
 ```bash
