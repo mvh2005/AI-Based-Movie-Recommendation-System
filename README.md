@@ -51,6 +51,36 @@ W = (v / (v + m) * R) + (m / (v + m) * C)
 | **R** | Average rating of the movie |
 | **C** | Mean vote across the dataset |
 
+
+---
+
+## 🎬 Search by Genre (Output)
+
+```bash
+Enter genre: Action
+
+Results:
+1. Mad Max: Fury Road
+2. John Wick
+3. The Dark Knight
+```
+## 🎬 Search by Movie Name
+
+| Movie Name        | Genre  | Rating |
+|------------------|--------|--------|
+| Inception        | Sci-Fi | 8.8    |
+| Interstellar     | Sci-Fi | 8.6    |
+| The Dark Knight  | Action | 9.0    |
+
+---
+## 🎬 Output Screenshots
+
+### Search by Genre
+![Genre Output](images/genre_output.png)
+
+### Search by Movie Name
+![Movie Search Output](images/movie_output.png)
+
 ---
 
 ## 📊 Key Features & Visualizations
