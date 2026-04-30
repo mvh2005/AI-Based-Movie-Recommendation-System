@@ -108,4 +108,5 @@ Open `movie_recommender.ipynb` in Jupyter Notebook or VS Code and run all cells 
 TMDB 5000 / 1M Movie Dataset
 
 ```
+https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies
 ```
