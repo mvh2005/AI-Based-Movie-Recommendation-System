@@ -246,6 +246,7 @@ Open your browser at **http://localhost:8501** 🎬
 
 ---
 
+
 ## 🎥 Dataset
 
 TMDB Movies Dataset (930K+ Movies)
@@ -253,3 +254,9 @@ TMDB Movies Dataset (930K+ Movies)
 ```
 https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies
 ```
+---
+## 📄 License
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+---
+
+
