@@ -1,0 +1,28 @@
+# Model artifacts (too large for GitHub)
+model_artifacts.pkl
+
+# Dataset (download separately from Kaggle)
+*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environments
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

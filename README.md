@@ -1,130 +1,118 @@
-# 🎬 Movie Recommendation System (TMDB)
+# 🎬 CineMatch 3D — AI Movie Recommendation System
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-orange)](https://scikit-learn.org/)
-[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-red)](https://pandas.pydata.org/)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML%20Engine-orange?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An end-to-end AI-powered recommendation engine utilizing the **TMDB dataset (1M+ movies)**. This project implements a hybrid approach combining statistical weighting with Natural Language Processing (NLP) to provide high-quality movie suggestions.
+> **An end-to-end AI-powered movie recommendation engine** with an immersive **3D Cinema-themed** Streamlit web interface. Combines NLP-based content filtering with the IMDb weighted rating formula to deliver high-quality, personalized movie suggestions.
+
+---
+
+## ✨ What's New — Latest Update
+
+- 🎭 **Full 3D Cinema UI Overhaul** — Rebuilt the entire frontend with a premium dark-theater aesthetic
+- 🎞️ **Animated Film Strip Header** — Scrolling film reel animation at the top of the page
+- 🧊 **3D Perspective Cards** — Movie cards with CSS `perspective` + `rotateY/X`, hover lift & shine sweep effects
+- 🌌 **Neon Floor Grid** — Animated 3D vanishing-point grid rendered purely in CSS
+- 💡 **Bebas Neue Typography** — Cinematic block-letter headings with 20-layer text-shadow depth
+- 🔄 **Demo Mode Fallback** — Runs instantly with 50 built-in iconic movies — no dataset download required
+- 🚀 **Streamlit Web App** — Launched with `streamlit run app.py` (no Jupyter needed)
 
 ---
 
 ## 🚀 Project Overview
-The system addresses the "cold start" and "popularity bias" problems by offering three distinct ways to discover content:
 
-1. **Content-Based Filtering**: Finds movies similar in theme and description using NLP.  
-2. **Weighted Rating System**: A statistical model that balances average rating with vote count.  
-3. **Interactive Discovery**: Dynamic dashboards for real-time genre and metadata exploration.  
+**CineMatch 3D** addresses the classic *"cold start"* and *"popularity bias"* problems in recommendation systems by offering four interactive discovery modes:
+
+| Tab | Feature |
+|-----|---------|
+| 🔍 Find Similar Movies | Content-based filtering via TF-IDF + Cosine Similarity |
+| 🏆 Top Rated | IMDb weighted rating formula across the full dataset |
+| 🎭 Browse by Genre | Filter and rank movies by any genre |
+| 🎥 Movie Details | Full metadata explorer — tagline, budget, revenue, runtime |
 
 ---
 
 ## 🛠️ Technical Architecture
 
 ### 1. Data Engineering & Processing
-To handle the scale of 1,000,000+ records, the pipeline includes:
 
-- **Robust Ingestion**: Parsing large CSVs with `latin1` encoding and error-handling for inconsistent line breaks.  
-- **Metadata Soup**: A unified feature vector created by merging `genres`, `keywords`, and `overviews` to capture the "DNA" of a movie.  
-
----
-
-### 2. The Recommendation Engines
-
-#### **A. Content-Based Filtering**
-We utilize **TF-IDF (Term Frequency-Inverse Document Frequency)** to vectorize movie descriptions and calculate **Cosine Similarity** between them.
+- **Robust CSV Ingestion**: Parses large CSVs with `latin1` encoding and `on_bad_lines='skip'` for fault tolerance
+- **Metadata Soup**: A unified `combined_features` vector merges `genres`, `keywords`, and `overview` text to capture the "DNA" of each movie
+- **Three-level Fallback**:
+  1. `model_artifacts.pkl` (pre-computed, fastest)
+  2. `TMDB_movie_dataset_v11.csv` (computed on first run)
+  3. Built-in demo dataset of 50 iconic films (zero setup)
 
 ---
 
-#### **B. IMDb Weighted Rating**
+### 2. Recommendation Engines
 
-To prevent movies with a single 10/10 rating from topping the charts, we implement the IMDb formula:
+#### A. Content-Based Filtering (TF-IDF + Cosine Similarity)
 
 ```
+TF-IDF Matrix  →  Cosine Similarity Matrix  →  Top-N similar movies
+```
 
-W = (v / (v + m) * R) + (m / (v + m) * C)
+**TF-IDF** (Term Frequency–Inverse Document Frequency) vectorizes movie descriptions. **Cosine Similarity** then measures the angular distance between any two movie vectors, returning the closest matches.
 
-````
+#### B. IMDb Weighted Rating Formula
+
+To prevent movies with very few votes from dominating the top charts:
+
+```
+W = (v / (v + m)) × R  +  (m / (v + m)) × C
+```
 
 | Variable | Description |
 |----------|-------------|
 | **v** | Number of votes for the movie |
-| **m** | Minimum votes required to be listed (90th percentile) |
+| **m** | Minimum votes required (90th percentile of dataset) |
 | **R** | Average rating of the movie |
-| **C** | Mean vote across the dataset |
-
-
----
-
-## Genres in the Dataset 
-
-![Movie Output](images/Genere_types.png)
-
-## 🎬 Search by Movie Name
-
-![Movie Output](images/Movie_Search.png)
-
-## 🎬 Search by Genre (Output)
-
-![Movie Output](images/Genre_Search.png)
-
-``` If the user wishes to view a film from the provided list, they may copy and paste the title into the field below to access the full movie information. ```
-
-## 🎬 Output Screen:
-
-🎥 Movie Metadata Explorer
-Movie Name: Avengers: Infinity War  
-
-============================================================  
-
-🎬 MOVIE DETAILS: AVENGERS: INFINITY WAR  
- 
-===========================================================
-
-Tagline:        An entire universe. Once and for all.  
-Genres:         Adventure, Action, Science Fiction  
-Release Date:   2018-04-25  
-Runtime:        149 mins  
-Rating:         8.255 (27713 votes)  
-Weighted Scr:   8.25  
-Budget:         $300,000,000  
-Revenue:        $2,052,415,039  
-Status:         Released  
-
-OVERVIEW:  
-As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.  
-
-==============================================================================
-
-
-
-
+| **C** | Mean vote average across the entire dataset |
 
 ---
 
-## 📊 Key Features & Visualizations
+## 🎨 3D UI Design System
 
-- **Interactive Dashboards**: Built with `ipywidgets`, enabling real-time recommendations without coding.  
-- **Genre Analytics**: Market share visualization using **Treemaps** (highlighting dominant genres like Drama and Documentary).  
-- **Metadata Explorer**: Insights into financial performance (Budget vs Revenue) and production trends.  
+The interface is built with **vanilla CSS** injected via Streamlit's `st.markdown()`:
+
+| Element | Technique |
+|---------|-----------|
+| Hero Title | `Bebas Neue` font + 20-layer `text-shadow` stack + gradient fill |
+| Background | Radial gradient spotlights + CSS animated perspective grid |
+| Film Strip | `@keyframes` translateX loop simulating a rolling film reel |
+| Movie Cards | `perspective(1000px) rotateY(-2deg)` — straightens + lifts on hover |
+| Stat Cards | `perspective(800px) rotateX(4deg)` — forward tilt with gold edge glow |
+| Neon Dividers | Multi-stop gradient lines with animated `box-shadow` pulse |
+| Genre Chips | Cyan `#00d4ff` bordered tags with subtle glow |
 
 ---
 
 ## 📦 Tech Stack
 
-- **Language**: Python  
-- **ML/NLP**: `scikit-learn` (TF-IDF, Cosine Similarity)  
-- **Data Analysis**: `pandas`, `numpy`  
-- **Visualization**: `matplotlib`, `seaborn`, `squarify`  
-- **UI/UX**: `ipywidgets`  
+| Layer | Technology |
+|-------|-----------|
+| **Language** | Python 3.8+ |
+| **Web UI** | Streamlit 1.x |
+| **ML / NLP** | scikit-learn (TF-IDF, Cosine Similarity) |
+| **Data** | pandas |
+| **Visualization** | Matplotlib, Seaborn (notebook), CSS (web app) |
+| **Fonts** | Bebas Neue, Outfit, Inter (Google Fonts) |
+| **Dataset** | TMDB Movie Dataset (1M+ movies via Kaggle) |
 
 ---
 
 ## ⚙️ Installation & Usage
 
 ### 1. Clone the Repository
+
 ```bash
-https://github.com/vigneshgit2005/AI-Based-Movie-Recommendation-System.git
-cd Movie_Recommendation.ipynd
-````
+git clone https://github.com/mvh2005/AI-Based-Movie-Recommendation-System.git
+cd AI-Based-Movie-Recommendation-System
+```
 
 ### 2. Install Dependencies
 
@@ -132,17 +120,110 @@ cd Movie_Recommendation.ipynd
 pip install -r requirements.txt
 ```
 
-### 3. Run the Notebook
+### 3. (Optional) Download Full Dataset
 
-Open `Movie_Recommendation.ipynd` in Jupyter Notebook or VS Code and run all cells to launch the interactive system.
+For the complete 1M+ movie experience, download the dataset from Kaggle:
+
+```
+https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies
+```
+
+Place `TMDB_movie_dataset_v11.csv` in the project root, then generate the model pickle:
+
+```bash
+python save_model.py
+```
+
+> **Skip this step** to run in Demo Mode with 50 pre-loaded iconic movies — no download needed.
+
+### 4. Launch the Web App
+
+```bash
+streamlit run app.py
+```
+
+Open your browser at **http://localhost:8501** 🎬
 
 ---
 
-## 📈 Future Roadmap
+## 🗂️ Project Structure
 
-* [ ] Integrate live TMDB API for real-time updates
-* [ ] Implement Collaborative Filtering using SVD
-* [ ] Deploy as a web app using Streamlit
+```
+AI-Based-Movie-Recommendation-System/
+│
+├── app.py                        # 🎬 Main Streamlit 3D Cinema web app
+├── save_model.py                 # 🔧 One-time script to build model_artifacts.pkl
+├── Movie_Recommendation.ipynb    # 📓 Jupyter notebook (EDA + ipywidgets UI)
+├── requirements.txt              # 📦 Python dependencies
+├── model_artifacts.pkl           # 🤖 Pre-computed model (generated by save_model.py)
+├── TMDB_movie_dataset_v11.csv    # 🗄️ Full dataset (download from Kaggle)
+├── images/                       # 🖼️  Screenshots
+└── README.md                     # 📖 This file
+```
+
+---
+
+## 🔄 How It Works — End-to-End Flow
+
+```
+CSV Dataset
+    │
+    ▼
+Preprocessing (combined_features = genres + keywords + overview)
+    │
+    ▼
+TF-IDF Vectorization  →  5000 × N sparse matrix
+    │
+    ▼
+Cosine Similarity Matrix  →  5000 × 5000 dense matrix
+    │
+    ▼
+Pickle Serialization (model_artifacts.pkl)
+    │
+    ▼
+Streamlit App loads artifacts → Serves recommendations in real-time
+```
+
+---
+
+## 🎬 Sample Output — Movie Details
+
+```
+🎬 MOVIE DETAILS: AVENGERS: INFINITY WAR
+═══════════════════════════════════════════════
+
+Tagline:        An entire universe. Once and for all.
+Genres:         Adventure, Action, Science Fiction
+Release Year:   2018
+Runtime:        149 min
+Rating:         ⭐ 8.3  (27,000 votes)
+Weighted Score: 8.25
+Budget:         $300,000,000
+Revenue:        $2,048,359,754
+
+OVERVIEW:
+As the Avengers and their allies have continued to protect the world
+from threats too large for any one hero to handle, a new danger has
+emerged from the cosmic shadows: Thanos...
+
+═══════════════════════════════════════════════
+```
+
+---
+
+## 📈 Roadmap
+
+- [x] Content-based filtering with TF-IDF + Cosine Similarity
+- [x] IMDb weighted rating system
+- [x] Genre browser with dynamic filtering
+- [x] Movie metadata explorer
+- [x] Streamlit web app deployment
+- [x] 3D Cinema-themed immersive UI
+- [x] Demo mode — zero-setup with built-in dataset
+- [ ] Integrate live TMDB API for real-time poster images
+- [ ] Collaborative Filtering using SVD / Matrix Factorization
+- [ ] User rating & watchlist persistence
+- [ ] Docker containerization for one-click deployment
 
 ---
 
@@ -150,9 +231,17 @@ Open `Movie_Recommendation.ipynd` in Jupyter Notebook or VS Code and run all cel
 
 **Vignesh M**
 
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+---
+
 ## 🎥 Dataset
 
-TMDB 5000 / 1M Movie Dataset
+TMDB Movies Dataset (930K+ Movies)
 
 ```
 https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies
