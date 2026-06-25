@@ -1,7 +1,3 @@
-pandas
-matplotlib
-seaborn
-scikit-learn
-ipywidgets
-IPython
 streamlit
+pandas
+scikit-learn
